@@ -1,92 +1,177 @@
 
-API REST de concesionario con Node.js, Express y MongoDB (Mongoose) para gestionar coches, 
-usuarios y ventas, incluyendo carga inicial de datos, filtros y relaciones con populate.
+# 🚗 API de Gestión de Coches con Node.js, Express y MongoDB
 
-CRUD de coches:
+API REST desarrollada con **Node.js**, **Express** y **MongoDB (Mongoose)** para la gestión de coches, usuarios y ventas.
 
-Login básico de usuario
+Este proyecto permite realizar operaciones CRUD, autenticación de usuarios y gestión básica de ventas.
 
-Registro de ventas (marca coche como vendido)
+---
 
-Consultar venta por id con populate (usuario y coche)
+## 📦 Tecnologías utilizadas
 
-Tecnologías:
+* Node.js
+* Express
+* MongoDB
+* Mongoose
+* Nodemon
 
-Node.js // Express // MongoDB + Mongoose // Nodemon (dev)
+---
 
-Estructura del proyecto:
+## 📁 Estructura del proyecto
 
-index.js → arranque del servidor + conexión Mongo + rutas
+```bash
+├── controller/
+│   ├── usuario.controllers.js
+│   ├── coche.controllers.js
+│   └── venta.controllers.js
+├── model/
+│   ├── usuario.models.js
+│   ├── coche.models.js
+│   └── venta.models.js
+├── routes/
+│   ├── usuario.routes.js
+│   ├── coche.routes.js
+│   └── venta.routes.js
+├── index.js
+├── package.json
+└── README.md
+```
 
-routes/ → endpoints
+---
 
-controller/ → lógica de negocio
+## ⚙️ Instalación
 
-model/ → esquemas Mongoose (Coche, Usuario, Venta)
+1. Clonar el repositorio:
 
-bbdd/ → datos semilla para carga inicial
+```bash
+git clone https://github.com/BryanStrk/02_app_coches_mongoose2.git
+cd 02_app_coches_mongoose2
+```
 
-Cómo ejecutar:
+2. Instalar dependencias:
 
-npm install``````
+```bash
+npm install
+```
 
-Arrancar MongoDB local:
+---
 
-node index.js 
+## 🚀 Ejecución del proyecto
 
-Conexión: 
+### Modo normal
 
-mongodb://127.0.0.1:27017/bbdd-coches_2026_Unir_daw
+```bash
+npm start
+```
 
-ideal pasarlo a .env.
+### Modo desarrollo (con nodemon)
 
-Endpoints
+```bash
+npm run dev
+```
 
-Coches
+---
 
-GET /api/coches/cargainicial → carga coches desde bbdd/coches.js
+## 🗄️ Base de datos
 
-GET /api/coches → lista todos
+El proyecto utiliza MongoDB local.
 
-GET /api/coches/precio-mayor/:precio → filtra por precio
+Por defecto:
 
-GET /api/coches/marca/:marca → filtra por marca
+```bash
+mongodb://127.0.0.1:27017/bbdd-coches-2026
+```
 
-POST /api/coches → crea coche
+⚠️ Asegúrate de que MongoDB esté corriendo antes de iniciar el servidor.
 
-PUT /api/coches/:id → actualiza
+---
 
-DELETE /api/coches/:id → elimina
+## 🔐 Endpoints principales
 
-Usuarios
+### 👤 Usuarios
 
-GET /api/usuarios/cargainicial → carga usuarios desde bbdd/usuarios.js
+| Método | Endpoint                     | Descripción            |
+| ------ | ---------------------------- | ---------------------- |
+| POST   | `/api/usuarios/login`        | Login de usuario       |
+| GET    | `/api/usuarios/:id`          | Obtener usuario por ID |
+| GET    | `/api/usuarios/cargainicial` | Carga inicial de datos |
 
-POST /api/usuarios/login → login por username/password
+---
 
-GET /api/usuarios/:id → buscar por id
+### 🚗 Coches
 
-Ventas
+| Método | Endpoint          | Descripción          |
+| ------ | ----------------- | -------------------- |
+| GET    | `/api/coches`     | Listar coches        |
+| POST   | `/api/coches`     | Crear coche          |
+| GET    | `/api/coches/:id` | Obtener coche por ID |
+| PUT    | `/api/coches/:id` | Actualizar coche     |
+| DELETE | `/api/coches/:id` | Eliminar coche       |
 
-POST /api/ventas → registra venta
+---
 
-GET /api/ventas/:id → detalle con populate
+### 💰 Ventas
 
-Ejemplos de uso
+| Método | Endpoint      | Descripción     |
+| ------ | ------------- | --------------- |
+| GET    | `/api/ventas` | Listar ventas   |
+| POST   | `/api/ventas` | Registrar venta |
 
-crear coche - login - registrar - venta
+---
 
-Mejoras futuras:
+## 📌 Ejemplo de Login (Postman)
 
-Guardar MONGO_URI en .env
+```http
+POST http://localhost:3000/api/usuarios/login
+```
 
-Añadir scripts start/dev en package.json
+```json
+{
+  "username": "tomas",
+  "password": "tomasin"
+}
+```
 
-Validaciones y manejo de errores más consistente
+---
 
-Autenticación real (JWT + hash de password con bcrypt)
+## ⚠️ Notas importantes
 
-Middleware de roles (ADMON/CLIENTE/DIRECTOR)
+* El orden de las rutas es importante (ej: `/login` antes que `/:id`)
+* `node_modules` está excluido mediante `.gitignore`
+* Se recomienda validar IDs antes de consultas con Mongoose
 
-Tests (Jest/Supertest)
+---
 
+## 🧪 Estado del proyecto
+
+✔️ Funcional
+✔️ CRUD básico implementado
+✔️ Conexión a MongoDB operativa
+✔️ Sistema de login básico
+
+---
+
+## 👨‍💻 Autor
+
+**Bryan**
+
+Proyecto realizado como parte del ciclo de **Desarrollo de Aplicaciones Web (DAW)**.
+
+---
+
+## 📄 Licencia
+
+Este proyecto es de uso educativo.
+
+---
+
+## 🔥 (Opcional – si quieres subir nivel)
+
+Si quieres dejarlo aún más pro, puedes añadir:
+
+* JWT para autenticación
+* Validaciones con Joi o express-validator
+* Variables de entorno (`.env`)
+* Docker
+
+---

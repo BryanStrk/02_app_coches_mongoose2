@@ -15,7 +15,7 @@ app.use("/api/usuarios",rutaUsuarios)
 app.use("/api/ventas", rutaVentas)
 
 // conexion a mongoose
-mongoose.connect("mongodb://127.0.0.1:27017/bbdd-coches_2026_Unir_daw")
+mongoose.connect("mongodb://127.0.0.1:27017/bbdd-coches-2026")
 .then(()=> console.log("Base de datos de MOngo En Marcha...."))
 .catch(()=> console.log("Bbdd NOOO arrancada"))
 // levantar el servicio
